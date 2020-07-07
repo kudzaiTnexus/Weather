@@ -29,6 +29,7 @@ class DetailsView: UIView {
     
     private let windSpeed: UILabel = {
         let label = UILabel(frame: .zero)
+        label.textColor = UIColor.red
         return label
     }()
     
@@ -88,7 +89,7 @@ extension DetailsView {
 
     
     func configureView(with forecast: Forecast) {
-        self.weatherDescription.text = forecast.weather.first?.description ?? ""
+        self.weatherDescription.text = (forecast.weather.first?.description ?? "").uppercased()
         self.weatherIcon.text = forecast.weather.first?.icon
         self.windSpeed.text = "Wind Speed: " + String(forecast.wind.speed)
         self.locationName.text = "Name: " + forecast.name

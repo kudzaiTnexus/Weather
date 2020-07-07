@@ -32,6 +32,16 @@ class HomeViewController: WeatherBaseViewController {
         self.verifyLocationServicesAreEnabled()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     func setupView() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
@@ -40,26 +50,6 @@ class HomeViewController: WeatherBaseViewController {
         
         self.view.addSubview(mapView)
         mapView.layoutPinToSuperviewEdges()
-    }
-    
-    func centerViewOnUserLocation() {
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    
-    func verifyLocationServicesAreEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
-            
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            checkLocationAuthorization()
-        } else {
-            // Show alert letting the user know they have to turn this on.
-        }
     }
     
     func startTimer() {
@@ -77,28 +67,6 @@ class HomeViewController: WeatherBaseViewController {
         }
     }
     
-    func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
-            centerViewOnUserLocation()
-            locationManager.startUpdatingLocation()
-            break
-        case .denied:
-            // Show alert instructing them how to turn on permissions
-            break
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            // Show an alert letting them know what's up
-            break
-        case .authorizedAlways:
-            break
-        @unknown default:
-            break
-        }
-    }
-    
     @objc func doubleTapped() {
         self.showWeatherDetails()
     }
@@ -112,6 +80,45 @@ class HomeViewController: WeatherBaseViewController {
 
 
 extension HomeViewController: CLLocationManagerDelegate {
+    
+    func pinViewOnUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    func verifyLocationServicesAreEnabled() {
+        if CLLocationManager.locationServicesEnabled() {
+            
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            checkLocationAuthorization()
+        } else {
+            self.showAlert(title: "Error", message: "Location is required for this app to work please turn on location")
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            pinViewOnUserLocation()
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            self.showAlert(title: "Error", message: "Please turn on location")
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            self.showAlert(title: "Error", message: "Location restricted")
+        case .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
@@ -142,7 +149,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
-    
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
 }
 
