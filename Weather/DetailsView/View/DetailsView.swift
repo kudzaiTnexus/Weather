@@ -32,7 +32,7 @@ class DetailsView: UIView {
         return label
     }()
     
-    private let country: UILabel = {
+    private let locationName: UILabel = {
         let label = UILabel(frame: .zero)
         return label
     }()
@@ -76,7 +76,7 @@ extension DetailsView {
         verticalstackView.addArrangedSubview(weatherIcon)
         verticalstackView.addArrangedSubview(weatherDescription)
         verticalstackView.addArrangedSubview(windSpeed)
-        verticalstackView.addArrangedSubview(country)
+        verticalstackView.addArrangedSubview(locationName)
         
         addSubview(verticalstackView)
         verticalstackView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,7 @@ extension DetailsView {
         self.weatherDescription.text = forecast.weather.first?.description ?? ""
         self.weatherIcon.text = forecast.weather.first?.icon
         self.windSpeed.text = "Wind Speed: " + String(forecast.wind.speed)
-        self.country.text = "Base: " + forecast.base
+        self.locationName.text = "Name: " + forecast.name
     }
 }
 
@@ -107,7 +107,7 @@ extension DetailsView {
             self.weatherDescription.alpha = 1
             self.weatherIcon.alpha = 1
             self.windSpeed.alpha = 1
-            self.country.alpha = 1
+            self.locationName.alpha = 1
             
             self.layoutIfNeeded()
         }
@@ -118,7 +118,7 @@ extension DetailsView {
         self.weatherDescription.alpha = 0
         self.weatherIcon.alpha = 0
         self.windSpeed.alpha = 0
-        self.country.alpha = 0
+        self.locationName.alpha = 0
         
         UIView.animate(withDuration: 1.4,
                        delay: 0,
