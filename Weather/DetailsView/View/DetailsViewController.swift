@@ -46,6 +46,8 @@ final class DetailsViewController: WeatherBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.errorViewController.delegate = self
+        
         view.backgroundColor = .clear
         view.addSubview(backdropView)
         view.addSubview(weatherView)
@@ -76,6 +78,7 @@ final class DetailsViewController: WeatherBaseViewController {
 extension DetailsViewController : ViewWeatherDataCallBack {
     func locationWeather(forecast: Forecast) {
         self.weatherView.configureView(with: forecast)
+        self.hideErrorView()
         self.hideActivityIndicator()
     }
     
