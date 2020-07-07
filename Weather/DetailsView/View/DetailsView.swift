@@ -15,7 +15,7 @@ class DetailsView: UIView {
     private var weatherDescription: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = UIColor.white
+        label.textColor = UIColor.blue
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -88,9 +88,9 @@ extension DetailsView {
 
     
     func configureView(with forecast: Forecast) {
-        self.weatherDescription.text = "Description: " + forecast.weather.first.debugDescription
+        self.weatherDescription.text = forecast.weather.first?.description ?? ""
         self.weatherIcon.text = forecast.weather.first?.icon
-        self.windSpeed.text = "Speed: " + String(forecast.wind.speed)
+        self.windSpeed.text = "Wind Speed: " + String(forecast.wind.speed)
         self.country.text = "Base: " + forecast.base
     }
 }
