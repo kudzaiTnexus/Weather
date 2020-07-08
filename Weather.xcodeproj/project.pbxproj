@@ -38,6 +38,8 @@
 		7688FB9224B4D16D00FE78DF /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688FB9124B4D16D00FE78DF /* Wind.swift */; };
 		7688FB9724B4E13F00FE78DF /* ViewWeatherDataCallBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688FB9624B4E13F00FE78DF /* ViewWeatherDataCallBack.swift */; };
 		7688FB9D24B4E96700FE78DF /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688FB9C24B4E96700FE78DF /* DetailsView.swift */; };
+		7688FBA324B5773100FE78DF /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688FBA224B5773100FE78DF /* UIColor+Extension.swift */; };
+		7688FBA524B58A1E00FE78DF /* GridStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7688FBA424B58A1E00FE78DF /* GridStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		7688FB9124B4D16D00FE78DF /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		7688FB9624B4E13F00FE78DF /* ViewWeatherDataCallBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWeatherDataCallBack.swift; sourceTree = "<group>"; };
 		7688FB9C24B4E96700FE78DF /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		7688FBA224B5773100FE78DF /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7688FBA424B58A1E00FE78DF /* GridStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +200,7 @@
 				7688FB7E24B4CBE200FE78DF /* ServiceClient.swift */,
 				7688FB8024B4CBFA00FE78DF /* Reachability.swift */,
 				7688FB8224B4CC4800FE78DF /* WeatherBaseViewController.swift */,
+				7688FBA224B5773100FE78DF /* UIColor+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 			children = (
 				7688FB7424B4CAD500FE78DF /* RetryDelegate.swift */,
 				7688FB7624B4CAEE00FE78DF /* ErrorViewController.swift */,
+				7688FBA424B58A1E00FE78DF /* GridStackView.swift */,
 			);
 			path = ErrorView;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				7688FB8E24B4D14600FE78DF /* Sys.swift in Sources */,
 				7688FB7524B4CAD500FE78DF /* RetryDelegate.swift in Sources */,
 				7688FB9724B4E13F00FE78DF /* ViewWeatherDataCallBack.swift in Sources */,
+				7688FBA524B58A1E00FE78DF /* GridStackView.swift in Sources */,
 				7688FB9D24B4E96700FE78DF /* DetailsView.swift in Sources */,
 				7688FB3724B4B98600FE78DF /* SceneDelegate.swift in Sources */,
 				7688FB9224B4D16D00FE78DF /* Wind.swift in Sources */,
@@ -408,6 +415,7 @@
 				7688FB6624B4B9F100FE78DF /* HomeViewController.swift in Sources */,
 				7688FB7D24B4CBC300FE78DF /* URLSession+Extension.swift in Sources */,
 				7688FB8824B4D10800FE78DF /* Clouds.swift in Sources */,
+				7688FBA324B5773100FE78DF /* UIColor+Extension.swift in Sources */,
 				7688FB7724B4CAEE00FE78DF /* ErrorViewController.swift in Sources */,
 				7688FB6C24B4C43400FE78DF /* DetailsViewController.swift in Sources */,
 			);
@@ -582,7 +590,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Weather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -591,6 +600,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mhou.tech.com.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -600,7 +610,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Weather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -609,6 +620,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mhou.tech.com.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

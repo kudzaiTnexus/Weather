@@ -14,8 +14,8 @@ class WeatherForecastViewModel {
     private weak var viewCallback: ViewWeatherDataCallBack?
     private var coordinates: Coordinates
     
-    init(coordinates: Coordinates?, viewCallback: ViewWeatherDataCallBack?) {
-        self.coordinates = coordinates!
+    init(coordinates: Coordinates, viewCallback: ViewWeatherDataCallBack?) {
+        self.coordinates = coordinates
         self.viewCallback = viewCallback
     }
 

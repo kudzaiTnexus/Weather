@@ -51,8 +51,7 @@ final class DetailsViewController: WeatherBaseViewController {
         view.backgroundColor = .clear
         view.addSubview(backdropView)
         view.addSubview(weatherView)
-        
-        weatherView.backgroundColor = .white
+
         weatherView.translatesAutoresizingMaskIntoConstraints = false
         weatherView.heightAnchor.constraint(equalToConstant: weatherViewHeight).isActive = true
         weatherView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

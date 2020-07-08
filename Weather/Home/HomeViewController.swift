@@ -22,7 +22,6 @@ class HomeViewController: WeatherBaseViewController {
     }()
     
     let locationManager = CLLocationManager()
-    let regionInMeters: Double = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +42,6 @@ class HomeViewController: WeatherBaseViewController {
     }
     
     func setupView() {
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap.numberOfTapsRequired = 2
-        mapView.addGestureRecognizer(tap)
-        
         self.view.addSubview(mapView)
         mapView.layoutPinToSuperviewEdges()
     }
@@ -67,10 +61,6 @@ class HomeViewController: WeatherBaseViewController {
         }
     }
     
-    @objc func doubleTapped() {
-        self.showWeatherDetails()
-    }
-    
     func showWeatherDetails() {
         let detailsViewContoller = DetailsViewController(coordinate: self.selectedCoordinates)
         detailsViewContoller.modalPresentationStyle = .custom
@@ -78,15 +68,7 @@ class HomeViewController: WeatherBaseViewController {
     }
 }
 
-
 extension HomeViewController: CLLocationManagerDelegate {
-    
-    func pinViewOnUserLocation() {
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: true)
-        }
-    }
     
     func verifyLocationServicesAreEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -104,7 +86,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
-            pinViewOnUserLocation()
             locationManager.startUpdatingLocation()
             break
         case .denied:
@@ -122,8 +103,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-        mapView.setRegion(region, animated: true)
+        mapView.setCenter(location.coordinate, animated: true)
     }
     
     

@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 extension UIView {
-
+    
     func layoutPinToSuperviewMargins(top: Bool = true,
-                                         leading: Bool = true,
-                                         bottom: Bool = true,
-                                         trailing: Bool = true,
-                                         insets: UIEdgeInsets = UIEdgeInsets.zero) {
+                                     leading: Bool = true,
+                                     bottom: Bool = true,
+                                     trailing: Bool = true,
+                                     insets: UIEdgeInsets = UIEdgeInsets.zero) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -58,7 +58,16 @@ extension UIView {
             trailingAnchor.constraint(equalTo: superview!.trailingAnchor, constant: -insets.right).isActive = true
         }
     }
-
+    
+    func applyGradient(colours: [UIColor]) -> Void {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.startPoint = CGPoint(x: 1.0, y: 0.2)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.layer.insertSublayer(gradient, at: 0)
+    }
+    
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) {
         DispatchQueue.main.async {
             let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
