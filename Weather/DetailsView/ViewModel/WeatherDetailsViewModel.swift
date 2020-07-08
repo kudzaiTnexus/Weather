@@ -10,7 +10,7 @@ import Foundation
 
 class WeatherForecastViewModel {
     
-    private var service: WeatherDetailsService = WeatherDetailsServiceImplementation()
+    private var repository: WeatherdetailsRepository = WeatherdetailsRepositoryImplementation()
     private weak var viewCallback: ViewWeatherDataCallBack?
     private var coordinates: Coordinates
     
@@ -20,7 +20,7 @@ class WeatherForecastViewModel {
     }
 
     func getForeCast() {
-        service.getWeatherDetailsFrom(location: self.coordinates) { result in
+        repository.getForeCast(from: self.coordinates) { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {

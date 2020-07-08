@@ -12,3 +12,9 @@ struct Coordinates {
     let latitude: CLLocationDegrees
     let longitude: CLLocationDegrees
 }
+
+extension Coordinates: Hashable {
+    static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude 
+    }
+}

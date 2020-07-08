@@ -20,8 +20,6 @@ protocol ServiceClient {
 extension ServiceClient {
     func fetchResources<T: Decodable>(url: URL, completion: @escaping (Result<T, ServiceError>) -> Void) {
         
-        let internetReachability = Reachability()
-        
         guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidURL))
             return
@@ -30,11 +28,6 @@ extension ServiceClient {
         guard let url = urlComponents.url else {
             completion(.failure(.invalidURL))
             return
-        }
-        
-        
-        if !internetReachability.isInternetAvailable() {
-            completion(.failure(.networkError))
         }
         
         URLSession.shared.dataTask(with: url) { (result) in
