@@ -122,9 +122,9 @@ extension HomeViewController: CLLocationManagerDelegate {
             if timer?.isValid ?? false {
                 self.showWeatherDetails()
                 self.stopTimer()
+            } else {
+                 self.startTimer()
             }
-            
-            self.startTimer()
             
         }
     }

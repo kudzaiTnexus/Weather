@@ -32,13 +32,7 @@ extension ServiceClient {
         
         URLSession.shared.dataTask(with: url) { (result) in
             switch result {
-            case .success(let (response, data)):
-                
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-                    200..<299 ~= statusCode else {
-                        completion(.failure(.requestFailed))
-                        return
-                }
+            case .success(let (_, data)):
                 
                 do {
                     let decoder = JSONDecoder()
@@ -50,8 +44,8 @@ extension ServiceClient {
                     completion(.failure(.decodeError))
                 }
                 
-            case .failure(_):
-                completion(.failure(.requestFailed))
+            case .failure(let error):
+                completion(.failure(.requestFailed(error: error)))
             }
         }.resume()
         

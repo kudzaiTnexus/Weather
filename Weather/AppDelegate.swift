@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let rootVC = HomeViewController()
+        let rootVC = HomeTabViewController()
         self.window?.rootViewController = UINavigationController(rootViewController: rootVC)
         
         return true

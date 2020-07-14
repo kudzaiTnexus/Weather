@@ -10,7 +10,7 @@ import Foundation
 
 enum ServiceError: Error {
     case invalidURL
-    case requestFailed
+    case requestFailed(error: Error)
     case decodeError
     case networkError
     
@@ -19,9 +19,9 @@ enum ServiceError: Error {
         case .invalidURL:
             return NSLocalizedString("The provided URL is not valid",
                                      comment: "Invalid URL")
-        case .requestFailed:
+        case .requestFailed(let error):
             return NSLocalizedString("The request has failed to complete. Please try again",
-                                     comment: "Request failure")
+                                     comment: error.localizedDescription)
         case .decodeError:
             return NSLocalizedString("Decoding error",
                                      comment: "Request failed")

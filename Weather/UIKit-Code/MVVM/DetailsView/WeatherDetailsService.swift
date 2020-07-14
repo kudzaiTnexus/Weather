@@ -16,15 +16,18 @@ struct WeatherDetailsServiceImplementation: WeatherDetailsService, ServiceClient
     
     let baseUrl = "https://api.openweathermap.org/data/2.5/weather?"
     let apiKey = "5b10e76c6001dd1d3c1f259484f1fce2"
-
-    func getWeatherDetailsFrom(location: Coordinates, completion result:@escaping (_ result: Result<Forecast, ServiceError>) -> Void) {
+    
+    func getWeatherDetailsFrom(location: Coordinates,
+                               completion result:@escaping (_ result: Result<Forecast, ServiceError>) -> Void) {
         
         let endpoint: String =  baseUrl+"lat=\(location.latitude)&lon=\(location.longitude)&appid="+apiKey
         
-        let serviceUrl =  URL(string: endpoint)
+        guard let serviceUrl = URL(string: endpoint) else {
+            result(.failure(.invalidURL))
+            return
+        }
         
-        fetchResources(url: serviceUrl!, completion: result)
+        fetchResources(url: serviceUrl, completion: result)
     }
-    
     
 }
